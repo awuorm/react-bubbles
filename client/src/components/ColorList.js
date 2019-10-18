@@ -21,13 +21,15 @@ const ColorList = (props) => {
   };
 
   const saveEdit = color => e => {
+    e.preventDefault();
     axiosWithAuth().put(`http://localhost:5000/api/colors/${color.id}`,color)
     .then(res => {
       console.log("response from edited color", res);
+      const editedColor = colors.filter((item) => item.id !== color.id);
+      updateColors([...editedColor, res.data]);
     })
     .catch(err => {
       console.log("error from edited color", err);
-      
     })
     // Make a put request to save your updated color
     // think about where will you get the id from...
@@ -35,6 +37,15 @@ const ColorList = (props) => {
   };
 
   const deleteColor = color => {
+    axiosWithAuth().delete(`http://localhost:5000/api/colors/${color.id}`)
+    .then(res => {
+      console.log("response from deleted color", res);
+      const deletedColor = colors.filter((item) => item.id !== color.id);
+      updateColors(deletedColor);
+    })
+    .catch(err => {
+      console.log("error from delted color", err);
+    })
     // make a delete request to delete this color
   };
 
