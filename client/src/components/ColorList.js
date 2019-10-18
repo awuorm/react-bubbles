@@ -53,8 +53,15 @@ const ColorList = props => {
       });
   };
 
+  const onLogout = e => {
+    e.preventDefault();
+    window.localStorage.removeItem("token");
+    props.history.push("/");
+  }
+
   return (
     <div className="colors-wrap">
+      
       <p>colors</p>
       <ul>
         {colors.map(color => (
