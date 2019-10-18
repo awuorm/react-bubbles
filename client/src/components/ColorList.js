@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axios/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+
 import AddColors from "./AddColors";
+
 
 const initialColor = {
   color: "",

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {StyledButton, StyledForm, StyledInput, StyledDiv} from "../Styles";
 
 const Login = (props) => {
   const { loginDetails, setLoginDetails } = props;
@@ -20,16 +21,16 @@ const Login = (props) => {
   };
 
   return (
-    <>
+    <StyledDiv>
       <h1>Welcome to the Bubble App!</h1>
-      <form>
+      <StyledForm>
         <label>Username</label>
-        <input onChange={valueChange} name="username" type="text"/>
+        <StyledInput onChange={valueChange} name="username" type="text"/>
         <label>Passord</label>
-        <input onChange={valueChange} name="password" type="password"/>
-        <button onClick={submitUserDetails}>Submit</button>
-      </form>
-    </>
+        <StyledInput onChange={valueChange} name="password" type="password"/>
+        <StyledButton onClick={submitUserDetails}>Submit</StyledButton>
+      </StyledForm>
+    </StyledDiv>
   );
 };
 
