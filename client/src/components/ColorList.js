@@ -1,30 +1,56 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosWithAuth from "../axios/axiosWithAuth";
+import { withRouter } from "react-router-dom";
+
+import AddColors from "./AddColors";
+import { StyledButton2, StyledButton} from "../Styles";
+
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+const ColorList = props => {
+  const { colors, updateColors } = props;
   const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  console.log("colors from colorlist", colors);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
   };
 
-  const saveEdit = e => {
+  const addColor = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    setAdding(true);
+  };
+
+  const saveEdit = color => e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${color.id}`, color)
+      .then(res => {
+        const editedColor = colors.filter(item => item.id !== color.id);
+        updateColors([...editedColor, res.data]);
+      })
+      .catch(err => {
+        console.log("error from edited color", err);
+      });
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => {
+        const deletedColor = colors.filter(item => item.id !== color.id);
+        updateColors(deletedColor);
+      })
+      .catch(err => {
+        console.log("error from delted color", err);
+      });
   };
 
   return (
@@ -71,15 +97,19 @@ const ColorList = ({ colors, updateColors }) => {
             />
           </label>
           <div className="button-row">
-            <button type="submit">save</button>
+            <button onClick={saveEdit(colorToEdit)} type="submit">
+              save
+            </button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>
       )}
+      {adding ? <AddColors  updateColors={updateColors} /> :
+      <StyledButton2 onClick={addColor}> + add Color</StyledButton2>
+           }
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
 
-export default ColorList;
+export default withRouter(ColorList);
