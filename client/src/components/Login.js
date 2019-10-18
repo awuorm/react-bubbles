@@ -3,8 +3,6 @@ import axios from "axios";
 
 const Login = (props) => {
   const { loginDetails, setLoginDetails } = props;
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
   const valueChange = e => {
     setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
   };
@@ -13,7 +11,6 @@ const Login = (props) => {
     axios
       .post("http://localhost:5000/api/login", loginDetails)
       .then(res => {
-        console.log("response from server", res);
         window.localStorage.setItem("token", res.data.payload);
         props.history.push("/bubble-page");
       })

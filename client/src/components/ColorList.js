@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
 import axiosWithAuth from "../axios/axiosWithAuth";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = (props) => {
-    console.log("props from colorlist", props);
+const ColorList = props => {
   const { colors, updateColors } = props;
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -22,31 +19,27 @@ const ColorList = (props) => {
 
   const saveEdit = color => e => {
     e.preventDefault();
-    axiosWithAuth().put(`http://localhost:5000/api/colors/${color.id}`,color)
-    .then(res => {
-      console.log("response from edited color", res);
-      const editedColor = colors.filter((item) => item.id !== color.id);
-      updateColors([...editedColor, res.data]);
-    })
-    .catch(err => {
-      console.log("error from edited color", err);
-    })
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+    axiosWithAuth()
+      .put(`http://localhost:5000/api/colors/${color.id}`, color)
+      .then(res => {
+        const editedColor = colors.filter(item => item.id !== color.id);
+        updateColors([...editedColor, res.data]);
+      })
+      .catch(err => {
+        console.log("error from edited color", err);
+      });
   };
 
   const deleteColor = color => {
-    axiosWithAuth().delete(`http://localhost:5000/api/colors/${color.id}`)
-    .then(res => {
-      console.log("response from deleted color", res);
-      const deletedColor = colors.filter((item) => item.id !== color.id);
-      updateColors(deletedColor);
-    })
-    .catch(err => {
-      console.log("error from delted color", err);
-    })
-    // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => {
+        const deletedColor = colors.filter(item => item.id !== color.id);
+        updateColors(deletedColor);
+      })
+      .catch(err => {
+        console.log("error from delted color", err);
+      });
   };
 
   return (
@@ -93,7 +86,9 @@ const ColorList = (props) => {
             />
           </label>
           <div className="button-row">
-            <button onClick={saveEdit(colorToEdit)} type="submit">save</button>
+            <button onClick={saveEdit(colorToEdit)} type="submit">
+              save
+            </button>
             <button onClick={() => setEditing(false)}>cancel</button>
           </div>
         </form>

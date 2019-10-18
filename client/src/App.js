@@ -7,7 +7,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import BubblePage from "./components/BubblePage";
 import axiosWithAuth from "./axios/axiosWithAuth";
 
-
 function App() {
   const [loginDetails, setLoginDetails] = useState({
     username: "",
@@ -16,15 +15,14 @@ function App() {
   const [bubbles, setBubbles] = useState([]);
 
   useEffect(() => {
-      axiosWithAuth().get("http://localhost:5000/api/colors")
+    axiosWithAuth()
+      .get("http://localhost:5000/api/colors")
       .then(res => {
-        console.log("response from colors endpoint", res);
-          setBubbles(res.data);
+        setBubbles(res.data);
       })
       .catch(err => {
         console.log("err from colors endpoint", err);
-      })
-
+      });
   }, []);
 
   return (
@@ -41,11 +39,12 @@ function App() {
             />
           )}
         />
-        <PrivateRoute path="/bubble-page" setBubbles={setBubbles} bubbles={bubbles}  component={BubblePage}/>
-        {/* 
-          Build a PrivateRoute component that will 
-          display BubblePage when you're authenticated 
-        */}
+        <PrivateRoute
+          path="/bubble-page"
+          setBubbles={setBubbles}
+          bubbles={bubbles}
+          component={BubblePage}
+        />
       </div>
     </Router>
   );
