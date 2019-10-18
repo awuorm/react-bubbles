@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import axiosWithAuth from "../axios/axiosWithAuth";
+import {withRouter} from "react-router-dom";
 
 const initialColor = {
   color: "",
@@ -20,10 +21,9 @@ const ColorList = (props) => {
   };
 
   const saveEdit = color => e => {
-    e.preventDefault();
     axiosWithAuth().put(`http://localhost:5000/api/colors/${color.id}`,color)
     .then(res => {
-      console.log("resposne from edited color", res);
+      console.log("response from edited color", res);
     })
     .catch(err => {
       console.log("error from edited color", err);
@@ -93,4 +93,4 @@ const ColorList = (props) => {
   );
 };
 
-export default ColorList;
+export default withRouter(ColorList);
