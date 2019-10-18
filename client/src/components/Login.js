@@ -15,7 +15,7 @@ const Login = (props) => {
       .then(res => {
         console.log("response from server", res);
         window.localStorage.setItem("token", res.data.payload);
-        props.history.push("/");
+        props.history.push("/bubble-page");
       })
       .catch(err => {
         console.log("error from server", err);
