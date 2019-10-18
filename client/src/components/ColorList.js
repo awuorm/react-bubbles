@@ -3,6 +3,7 @@ import axiosWithAuth from "../axios/axiosWithAuth";
 import { withRouter } from "react-router-dom";
 
 import AddColors from "./AddColors";
+import { StyledButton2, StyledButton} from "../Styles";
 
 
 const initialColor = {
@@ -104,7 +105,7 @@ const ColorList = props => {
         </form>
       )}
       {adding ? <AddColors  updateColors={updateColors} /> :
-      <button onClick={addColor}> + add Color</button>
+      <StyledButton2 onClick={addColor}> + add Color</StyledButton2>
            }
       <div className="spacer" />
     </div>

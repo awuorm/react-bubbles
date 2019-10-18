@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import uuid from 'uuid';
 import axiosWithAuth from "../axios/axiosWithAuth";
 
+import {StyledButton,StyledForm, StyledButton2} from "../Styles";
+
 const AddColors = (props) => {
     const {updateColors} = props;
     const initialColor = {
@@ -33,13 +35,14 @@ const AddColors = (props) => {
 
   return (
     <>
-      <form>
+      <StyledForm>
+          <h4>Add a new color</h4>
         <label>Color Name</label>
         <input onChange={valueChange} name="color" type="text"/>
         <label>Color Hex Code</label>
         <input onChange={valueChange} name="code" type="text"/>
-        <button onClick={submitUserDetails}>Submit</button>
-      </form>
+        <StyledButton2 onClick={submitUserDetails}>Submit</StyledButton2>
+      </StyledForm>
     </>
   );
 };
