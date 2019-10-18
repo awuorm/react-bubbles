@@ -8,6 +8,12 @@ export const StyledDiv = styled.div`
   color: aliceblue;
 `;
 
+export const StyledH1 = styled.h1`
+border-bottom: 1px solid grey;
+box-shadow: 0 8px 6px -6px black;
+padding: 0.5em;
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

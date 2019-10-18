@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {StyledButton, StyledForm, StyledInput, StyledDiv} from "../Styles";
+import {StyledButton, StyledForm, StyledInput, StyledDiv, StyledH1} from "../Styles";
 
 const Login = (props) => {
   const { loginDetails, setLoginDetails } = props;
@@ -22,8 +22,9 @@ const Login = (props) => {
 
   return (
     <StyledDiv>
-      <h1>Welcome to the Bubble App!</h1>
+      <StyledH1>Welcome to the Bubble App!</StyledH1>
       <StyledForm>
+        <h4>Login to continue</h4>
         <label>Username</label>
         <StyledInput onChange={valueChange} name="username" type="text"/>
         <label>Passord</label>

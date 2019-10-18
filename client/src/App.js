@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import BubblePage from "./components/BubblePage";
 import axiosWithAuth from "./axios/axiosWithAuth";
 
+
 function App() {
   const [loginDetails, setLoginDetails] = useState({
     username: "",
