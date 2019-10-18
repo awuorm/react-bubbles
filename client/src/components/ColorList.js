@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axios/axiosWithAuth";
 import { withRouter } from "react-router-dom";
+import AddColors from "./AddColors";
 
 const initialColor = {
   color: "",
@@ -10,11 +11,18 @@ const initialColor = {
 const ColorList = props => {
   const { colors, updateColors } = props;
   const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  console.log("colors from colorlist", colors);
 
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
+  };
+
+  const addColor = e => {
+    e.preventDefault();
+    setAdding(true);
   };
 
   const saveEdit = color => e => {
@@ -93,8 +101,10 @@ const ColorList = props => {
           </div>
         </form>
       )}
+      {adding ? <AddColors  updateColors={updateColors} /> :
+      <button onClick={addColor}> + add Color</button>
+           }
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
