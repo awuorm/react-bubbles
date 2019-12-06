@@ -8,6 +8,26 @@ export const StyledDiv = styled.div`
   color: aliceblue;
 `;
 
+export const StyledH1 = styled.h1`
+border-bottom: 1px solid grey;
+box-shadow: 0 8px 6px -6px black;
+padding: 0.5em;
+`;
+
+export const StyledDivLogout = styled.div`
+    margin: 1em;
+    width: 100%;
+`;
+
+export const StyledLogout = styled.button`
+  padding: 0.7em;
+  width: 10vw;
+  color: aliceblue;
+  background-color: #8A2BE2;
+  border: none;
+  margin-left: 50vw;
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
